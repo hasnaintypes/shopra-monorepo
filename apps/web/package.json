@@ -1,0 +1,34 @@
+{
+  "name": "web",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "test": "jest --passWithNoTests",
+    "test:ci": "jest --runInBand",
+    "test:watch": "jest --watch",
+    "docker:build:dev": "docker build -f ../../Dockerfile.dev --build-arg APP=web -t web-dev ../..",
+    "docker:build:prod": "docker build -f ../../Dockerfile.prod --build-arg APP=web -t web-prod ../..",
+    "docker:run:dev": "docker run -p 3000:3000 web-dev",
+    "docker:run:prod": "docker run -p 3000:3000 web-prod"
+  },
+  "dependencies": {
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "next": "15.5.2"
+  },
+  "devDependencies": {
+    "typescript": "^5",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@tailwindcss/postcss": "^4",
+    "tailwindcss": "^4",
+    "eslint": "^9",
+    "eslint-config-next": "15.5.2",
+    "@eslint/eslintrc": "^3"
+  }
+}

@@ -1,0 +1,215 @@
+version: '3.8'
+services:
+  web:
+    build:
+      context: .
+      dockerfile: apps/web/Dockerfile
+      target: dev
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./apps/web:/app/apps/web
+      - ./libs:/app/libs
+      - ./package.json:/app/package.json
+      - ./pnpm-lock.yaml:/app/pnpm-lock.yaml
+      - ./pnpm-workspace.yaml:/app/pnpm-workspace.yaml
+      - pnpm-store:/root/.pnpm-store
+    environment:
+      - NODE_ENV=development
+    command: pnpm --filter web dev
+  seller-portal:
+    build:
+      context: .
+      dockerfile: apps/seller-portal/Dockerfile
+      target: dev
+    ports:
+      - '3001:3000'
+    volumes:
+      - ./apps/seller-portal:/app/apps/seller-portal
+      - ./libs:/app/libs
+      - ./package.json:/app/package.json
+      - ./pnpm-lock.yaml:/app/pnpm-lock.yaml
+      - ./pnpm-workspace.yaml:/app/pnpm-workspace.yaml
+      - pnpm-store:/root/.pnpm-store
+    environment:
+      - NODE_ENV=development
+    command: pnpm --filter seller-portal dev
+  admin-panel:
+    build:
+      context: .
+      dockerfile: apps/admin-panel/Dockerfile
+      target: dev
+    ports:
+      - '3002:3000'
+    volumes:
+      - ./apps/admin-panel:/app/apps/admin-panel
+      - ./libs:/app/libs
+      - ./package.json:/app/package.json
+      - ./pnpm-lock.yaml:/app/pnpm-lock.yaml
+      - ./pnpm-workspace.yaml:/app/pnpm-workspace.yaml
+      - pnpm-store:/root/.pnpm-store
+    environment:
+      - NODE_ENV=development
+    command: pnpm --filter admin-panel dev
+  api-gateway:
+    build:
+      context: .
+      dockerfile: services/api-gateway/Dockerfile
+      target: dev
+    ports:
+      - '4000:4000'
+    volumes:
+      - ./services/api-gateway:/app/services/api-gateway
+      - ./libs:/app/libs
+      - ./package.json:/app/package.json
+      - ./pnpm-lock.yaml:/app/pnpm-lock.yaml
+      - ./pnpm-workspace.yaml:/app/pnpm-workspace.yaml
+      - pnpm-store:/root/.pnpm-store
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - svc-auth
+      - svc-product
+      - svc-order
+      - svc-recommendation
+      - svc-chat
+      - svc-user
+      - svc-notifications
+    command: pnpm --filter api-gateway start:dev
+  svc-auth:
+    build:
+      context: .
+      dockerfile: services/svc-auth/Dockerfile
+      target: dev
+    ports:
+      - '4001:4001'
+    volumes:
+      - ./services/svc-auth:/app/services/svc-auth
+      - ./libs:/app/libs
+      - ./package.json:/app/package.json
+      - ./pnpm-lock.yaml:/app/pnpm-lock.yaml
+      - ./pnpm-workspace.yaml:/app/pnpm-workspace.yaml
+      - pnpm-store:/root/.pnpm-store
+    environment:
+      - NODE_ENV=development
+    command: pnpm --filter svc-auth start:dev
+  svc-product:
+    build:
+      context: .
+      dockerfile: services/svc-product/Dockerfile
+      target: dev
+    ports:
+      - '4002:4002'
+    volumes:
+      - ./services/svc-product:/app/services/svc-product
+      - ./libs:/app/libs
+      - ./package.json:/app/package.json
+      - ./pnpm-lock.yaml:/app/pnpm-lock.yaml
+      - ./pnpm-workspace.yaml:/app/pnpm-workspace.yaml
+      - pnpm-store:/root/.pnpm-store
+    environment:
+      - NODE_ENV=development
+    command: pnpm --filter svc-product start:dev
+  svc-order:
+    build:
+      context: .
+      dockerfile: services/svc-order/Dockerfile
+      target: dev
+    ports:
+      - '4003:4003'
+    volumes:
+      - ./services/svc-order:/app/services/svc-order
+      - ./libs:/app/libs
+      - ./package.json:/app/package.json
+      - ./pnpm-lock.yaml:/app/pnpm-lock.yaml
+      - ./pnpm-workspace.yaml:/app/pnpm-workspace.yaml
+      - pnpm-store:/root/.pnpm-store
+    environment:
+      - NODE_ENV=development
+    command: pnpm --filter svc-order start:dev
+  svc-recommendation:
+    build:
+      context: .
+      dockerfile: services/svc-recommendation/Dockerfile
+      target: dev
+    ports:
+      - '4004:4004'
+    volumes:
+      - ./services/svc-recommendation:/app/services/svc-recommendation
+      - ./libs:/app/libs
+      - ./package.json:/app/package.json
+      - ./pnpm-lock.yaml:/app/pnpm-lock.yaml
+      - ./pnpm-workspace.yaml:/app/pnpm-workspace.yaml
+      - pnpm-store:/root/.pnpm-store
+    environment:
+      - NODE_ENV=development
+    command: pnpm --filter svc-recommendation start:dev
+  svc-chat:
+    build:
+      context: .
+      dockerfile: services/svc-chat/Dockerfile
+      target: dev
+    ports:
+      - '4005:4005'
+    volumes:
+      - ./services/svc-chat:/app/services/svc-chat
+      - ./libs:/app/libs
+      - ./package.json:/app/package.json
+      - ./pnpm-lock.yaml:/app/pnpm-lock.yaml
+      - ./pnpm-workspace.yaml:/app/pnpm-workspace.yaml
+      - pnpm-store:/root/.pnpm-store
+    environment:
+      - NODE_ENV=development
+    command: pnpm --filter svc-chat start:dev
+  svc-user:
+    build:
+      context: .
+      dockerfile: services/svc-user/Dockerfile
+      target: dev
+    ports:
+      - '4006:4006'
+    volumes:
+      - ./services/svc-user:/app/services/svc-user
+      - ./libs:/app/libs
+      - ./package.json:/app/package.json
+      - ./pnpm-lock.yaml:/app/pnpm-lock.yaml
+      - ./pnpm-workspace.yaml:/app/pnpm-workspace.yaml
+      - pnpm-store:/root/.pnpm-store
+    environment:
+      - NODE_ENV=development
+    command: pnpm --filter svc-user start:dev
+  svc-notifications:
+    build:
+      context: .
+      dockerfile: services/svc-notifications/Dockerfile
+      target: dev
+    ports:
+      - '4007:4007'
+    volumes:
+      - ./services/svc-notifications:/app/services/svc-notifications
+      - ./libs:/app/libs
+      - ./package.json:/app/package.json
+      - ./pnpm-lock.yaml:/app/pnpm-lock.yaml
+      - ./pnpm-workspace.yaml:/app/pnpm-workspace.yaml
+      - pnpm-store:/root/.pnpm-store
+    environment:
+      - NODE_ENV=development
+    command: pnpm --filter svc-notifications start:dev
+  test:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./apps:/app/apps
+      - ./services:/app/services
+      - ./libs:/app/libs
+      - ./package.json:/app/package.json
+      - ./pnpm-lock.yaml:/app/pnpm-lock.yaml
+      - ./pnpm-workspace.yaml:/app/pnpm-workspace.yaml
+      - pnpm-store:/root/.pnpm-store
+    environment:
+      - NODE_ENV=test
+    command: pnpm test
+volumes:
+  pnpm-store:
+    driver: local

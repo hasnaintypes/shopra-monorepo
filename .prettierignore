@@ -1,0 +1,11 @@
+# Ignore files and directories that should not be formatted
+node_modules
+pnpm-lock.yaml
+dist
+.next
+out
+*.log
+coverage
+.git
+*.env
+.DS_Store

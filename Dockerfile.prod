@@ -1,0 +1,33 @@
+FROM node:20-alpine AS builder
+WORKDIR /app
+
+# Install pnpm
+RUN corepack enable && corepack prepare pnpm@latest --activate
+
+# Copy workspace files
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+COPY packages ./packages
+COPY apps ./apps
+
+# Install dependencies & build all apps
+RUN pnpm install --frozen-lockfile
+RUN pnpm --filter "./apps/*" build
+
+# --- Runner stage ---
+FROM node:20-alpine AS runner
+WORKDIR /app
+
+# Copy only build output for all apps
+COPY --from=builder /app/apps/web/.next ./apps/web/.next
+COPY --from=builder /app/apps/web/public ./apps/web/public
+COPY --from=builder /app/apps/web/package.json ./apps/web/package.json
+COPY --from=builder /app/apps/seller-portal/.next ./apps/seller-portal/.next
+COPY --from=builder /app/apps/seller-portal/public ./apps/seller-portal/public
+COPY --from=builder /app/apps/seller-portal/package.json ./apps/seller-portal/package.json
+COPY --from=builder /app/apps/admin-panel/.next ./apps/admin-panel/.next
+COPY --from=builder /app/apps/admin-panel/public ./apps/admin-panel/public
+COPY --from=builder /app/apps/admin-panel/package.json ./apps/admin-panel/package.json
+COPY --from=builder /app/node_modules ./node_modules
+
+EXPOSE 3000 3001 3002
+CMD ["pnpm", "start"]

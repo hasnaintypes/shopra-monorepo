@@ -1,0 +1,40 @@
+# Node dependencies
+node_modules
+.pnp.*
+.pnpm-debug.log
+
+# Build output
+dist
+build
+.out
+.next
+coverage
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Environment variables
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# IDEs
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Husky & Git
+.husky/_
+
+# Misc
+*.log
+*.tsbuildinfo
