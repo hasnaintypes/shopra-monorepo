@@ -1,12 +1,13 @@
 import { getConfig } from '@shopra/config';
 import * as fs from 'fs-extra';
+import type { TransformableInfo } from 'logform';
 import process from 'node:process';
 import * as path from 'path';
 import DailyRotateFile from 'winston-daily-rotate-file';
 
 // HACK: Patch DailyRotateFile to ensure logs directory exists before writing
 class PatchedDailyRotateFile extends DailyRotateFile {
-  log(info: unknown, callback: () => void) {
+  log(info: TransformableInfo, callback: () => void) {
     try {
       const logsDir = path.resolve(process.cwd(), 'logs');
       fs.ensureDirSync(logsDir);

@@ -66,13 +66,13 @@ export class KafkaTransport {
           ],
         });
         return;
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (error) {
         attempt++;
         if (attempt > this.retryAttempts) {
           // BLOCKER: If Kafka is down, logs will be lost after retries
           // FIXME: Consider adding dead-letter or alerting system
-          // eslint-disable-next-line no-undef
-          console.error('Failed to send log to Kafka after retries:', error);
+          // Fallback: Optionally emit to a file, external service, or alert system here
           return;
         }
         // NOTE: Backoff before retrying

@@ -52,10 +52,12 @@ describe('PrismaService', () => {
 
     // Stub $on to capture the callback instead of using Prisma’s internal system
     const service = new PrismaService(mockLogger);
-    service.$on = jest.fn((event, cb) => {
+    type PrismaOn = (event: string, cb: (e: any) => void) => PrismaService;
+    const mockOn: PrismaOn = (event, cb) => {
       if (event === 'query') capturedCb = cb;
       return service;
-    }) as any;
+    };
+    service.$on = mockOn;
 
     // Re-attach logger with our stubbed $on
     (service as any).attachQueryLogger();
