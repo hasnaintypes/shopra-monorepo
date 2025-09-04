@@ -38,5 +38,8 @@ jobs:
       - name: Lint code
         run: pnpm lint
 
+      - name: Show Jest config
+        run: pnpm jest --show-config
+
       - name: Run tests
         run: pnpm test:ci
