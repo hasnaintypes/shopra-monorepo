@@ -1,13 +1,16 @@
 /* global process */
-import { envSchema } from './validators';
+import dotenv from 'dotenv';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import { z } from 'zod';
-/**
- * Validates and returns the environment configuration object.
- * @return {EnvConfig} The validated and typed environment config.
- * @throws If validation fails.
- * @example
- * const config = getConfig();
- */
+import { envSchema } from './validators';
+
+// Get __dirname in ES modules
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+// Always load root .env
+dotenv.config({ path: path.resolve(__dirname, '../../../../.env') });
+
 export function getConfig(): EnvConfig {
   const result = envSchema.safeParse(process.env);
   if (!result.success) {

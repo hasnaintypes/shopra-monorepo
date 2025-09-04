@@ -4,10 +4,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "pnpm -r --if-present start",
+    "start:apps": "pnpm -r --filter ./apps/** --if-present dev",
+    "start:services": "pnpm -r --filter ./services/** --if-present start",
+    "build": "pnpm -r --if-present build",
+    "build:apps": "pnpm -r --filter ./apps/** --if-present build",
+    "build:services": "pnpm -r --filter ./services/** --if-present build",
+    "build:packages": "pnpm -r --filter ./packages/** --if-present build",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "lint": "eslint apps/admin-panel/src apps/seller-portal/src apps/web/src services/api-gateway/src services/svc-auth/src services/svc-chat/src services/svc-notifications/src services/svc-order/src services/svc-product/src services/svc-recommendation/src services/svc-user/src packages/config/src packages/shared-types/src --ext .ts,.tsx,.js,.jsx",
-    "lint:fix": "eslint apps/admin-panel/src apps/seller-portal/src apps/web/src services/api-gateway/src services/svc-auth/src services/svc-chat/src services/svc-notifications/src services/svc-order/src services/svc-product/src services/svc-recommendation/src services/svc-user/src packages/config/src packages/shared-types/src --ext .ts,.tsx,.js,.jsx --fix",
+    "lint": "eslint apps/*/src/**/*.{ts,tsx,js,jsx} services/*/src/**/*.{ts,tsx,js,jsx} packages/*/src/**/*.{ts,tsx,js,jsx}",
+    "lint:fix": "eslint apps/*/src/**/*.{ts,tsx,js,jsx} services/*/src/**/*.{ts,tsx,js,jsx} packages/*/src/**/*.{ts,tsx,js,jsx} --fix",
     "test": "pnpm -r --if-present test",
     "test:ci": "pnpm -r --if-present test:ci || pnpm -r --if-present test",
     "test:apps": "pnpm -r --filter ./apps/** --if-present test",
@@ -17,7 +24,11 @@
     "docker:dev": "docker compose -f docker-compose.yml --env-file .env.dev up --build",
     "docker:prod": "docker compose -f docker-compose.yml -f docker-compose.prod.yml up --build -d",
     "docker:test": "docker compose -f docker-compose.yml run --rm test",
-    "docker:build:all": "pnpm -r run docker:build:prod"
+    "docker:build:all": "pnpm -r run docker:build:prod",
+    "prisma:generate": "pnpm -r --filter ./packages/prisma-client --if-present prisma:generate",
+    "prisma:db:push": "pnpm -r --filter ./packages/prisma-client --if-present prisma:db:push",
+    "prisma:db:pull": "pnpm -r --filter ./packages/prisma-client --if-present prisma:db:pull",
+    "prisma:format": "pnpm -r --filter ./packages/prisma-client --if-present prisma:format"
   },
   "keywords": [],
   "author": "",
@@ -43,7 +54,12 @@
     "jest-environment-jsdom": "^30.1.1",
     "lint-staged": "^16.1.5",
     "prettier": "^3.6.2",
+    "prisma": "^5.22.0",
     "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
     "typescript": "^5.9.2"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.2"
   }
 }
