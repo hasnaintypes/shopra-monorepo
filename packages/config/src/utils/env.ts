@@ -1,10 +1,13 @@
 /* global process */
 import dotenv from 'dotenv';
 import path from 'path';
+import { fileURLToPath } from 'url';
 import { z } from 'zod';
 import { envSchema } from './validators';
 
-declare var __dirname: string;
+// Get __dirname in ES modules
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
 // Always load root .env
 dotenv.config({ path: path.resolve(__dirname, '../../../../.env') });
 

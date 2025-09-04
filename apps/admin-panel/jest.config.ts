@@ -1,6 +1,6 @@
 /** @jest-config-loader ts-node */
-import nextJest from 'next/jest.js';
 import type { Config } from 'jest';
+import nextJest from 'next/jest.js';
 
 const createJestConfig = nextJest({
   dir: './',
@@ -13,6 +13,7 @@ const customJestConfig: Config = {
     // Handle module aliases from tsconfig.json
     '^@/(.*)$': '<rootDir>/src/$1',
   },
+  testMatch: ['<rootDir>/src/**/*.test.{ts,tsx}'],
 };
 
 export default createJestConfig(customJestConfig);

@@ -56,7 +56,12 @@ export class KafkaTransport {
             {
               key: logEntry.service,
               value: JSON.stringify(logEntry),
-              timestamp: new Date(logEntry.timestamp).getTime().toString(),
+              timestamp:
+                typeof logEntry.timestamp === 'number'
+                  ? logEntry.timestamp.toString()
+                  : /^\d+$/.test(logEntry.timestamp)
+                    ? logEntry.timestamp
+                    : new Date(logEntry.timestamp).getTime().toString(),
             },
           ],
         });

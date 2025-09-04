@@ -17,13 +17,18 @@ jest.mock('kafkajs', () => ({
   })),
 }));
 
-describe('LoggerService', () => {
+// Shared Winston cleanup utility function
+function cleanupWinstonLoggers() {
   winston.loggers.loggers.forEach((logger) => {
     logger.transports.forEach((t) => {
       logger.remove(t);
       if (typeof t.close === 'function') t.close();
     });
   });
+}
+
+describe('LoggerService', () => {
+  cleanupWinstonLoggers();
   let service: LoggerService;
   const logsDir = path.resolve(process.cwd(), 'logs');
 

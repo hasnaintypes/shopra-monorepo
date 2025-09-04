@@ -21,7 +21,7 @@
   "license": "MIT",
   "dependencies": {
     "@nestjs/common": "^10.0.0",
-    "@shopra/config": "link:..\\config",
+    "@shopra/config": "workspace:*",
     "fs-extra": "^11.1.1",
     "kafkajs": "^2.2.4",
     "reflect-metadata": "^0.1.13",

@@ -7,15 +7,6 @@ import { FileTransport } from '../../transports/file.transport';
 /* global setTimeout */
 
 describe('FileTransport', () => {
-  afterAll(() => {
-    // Clean up Winston transports to avoid file handle errors
-    winston.loggers.loggers.forEach((logger) => {
-      logger.transports.forEach((t) => {
-        logger.remove(t);
-        if (typeof t.close === 'function') t.close();
-      });
-    });
-  });
   beforeAll(() => {
     fs.ensureDirSync(logsDir);
     // Write a dummy log entry to ensure the log file is created before tests
@@ -32,14 +23,15 @@ describe('FileTransport', () => {
   });
   const logsDir = path.resolve(process.cwd(), 'logs');
 
-  // Clean up log files only after Winston transports are closed
   afterAll(() => {
+    // Clean up Winston transports to avoid file handle errors
     winston.loggers.loggers.forEach((logger) => {
       logger.transports.forEach((t) => {
         logger.remove(t);
         if (typeof t.close === 'function') t.close();
       });
     });
+    // Clean up log files after Winston transports are closed
     if (fs.existsSync(logsDir)) {
       fs.readdirSync(logsDir).forEach((file) => {
         fs.unlinkSync(path.join(logsDir, file));
