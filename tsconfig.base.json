@@ -13,7 +13,9 @@
     "noEmit": true,
     "baseUrl": ".",
     "paths": {
-      "@config/*": ["packages/config/src/*"]
+      "@shopra/config": ["packages/config/dist/index"],
+      "@shopra/logging": ["packages/logging-lib/dist/index"],
+      "@shopra/prisma": ["packages/prisma-client/dist/index"]
     },
     "allowJs": true,
     "incremental": true
