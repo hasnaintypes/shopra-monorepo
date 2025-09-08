@@ -13,7 +13,9 @@
     "noEmit": true,
     "baseUrl": ".",
     "paths": {
-      "@config/*": ["packages/config/src/*"]
+      "@config/*": ["packages/config/src/*"],
+      "@shopra/ui": ["packages/ui/src/*"],
+      "@shopra/ui/*": ["packages/ui/src/*"]
     },
     "allowJs": true,
     "incremental": true

@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UI Components Examples</title>
+    <link rel="stylesheet" href="./index.css" />
+  </head>
+  <body class="p-6">
+    <h1>UI Components Examples</h1>
+    <div id="app"></div>
+
+    <script type="module">
+      import * as Examples from './index.js';
+
+      const app = document.getElementById('app');
+
+      for (const [name, Example] of Object.entries(Examples)) {
+        if (typeof Example === 'function') {
+          const container = document.createElement('div');
+          container.style.marginBottom = '2rem';
+
+          const title = document.createElement('h2');
+          title.textContent = name;
+          container.appendChild(title);
+
+          try {
+            const element = Example();
+            if (element instanceof HTMLElement) {
+              container.appendChild(element);
+            } else if (typeof element === 'string') {
+              container.innerHTML += element;
+            }
+          } catch (e) {
+            container.innerHTML += `<p style="color:red;">Error rendering ${name}</p>`;
+          }
+
+          app.appendChild(container);
+        }
+      }
+    </script>
+  </body>
+</html>
