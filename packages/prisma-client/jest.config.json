@@ -7,5 +7,8 @@
   "collectCoverageFrom": ["src/**/*.ts", "!src/**/*.d.ts", "!src/index.ts"],
   "coverageDirectory": "coverage",
   "coverageReporters": ["text", "lcov", "html"],
-  "moduleFileExtensions": ["ts", "js", "json", "node"]
+  "moduleFileExtensions": ["ts", "js", "json", "node"],
+  "moduleNameMapper": {
+    "^@shopra/config$": "<rootDir>/../../packages/config/src/index.ts"
+  }
 }

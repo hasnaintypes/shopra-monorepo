@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "module": "ESNext",
+    "module": "es2020",
     "lib": ["ES2022", "DOM"],
     "moduleResolution": "Node",
     "strict": true,
@@ -10,7 +10,6 @@
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true,
     "baseUrl": ".",
     "paths": {
       "@shopra/config": ["packages/config/dist/index"],

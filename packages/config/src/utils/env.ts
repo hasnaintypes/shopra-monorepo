@@ -1,15 +1,17 @@
 /* global process */
 import dotenv from 'dotenv';
 import path from 'path';
-import { fileURLToPath } from 'url';
 import { z } from 'zod';
 import { envSchema } from './validators';
 
-// Get __dirname in ES modules
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
+declare const __dirname: string | undefined;
 
-// Always load root .env
-dotenv.config({ path: path.resolve(__dirname, '../../../../.env') });
+// Get __dirname in both ESM and CJS
+
+// Always load root .env (CJS/Jest compatible)
+dotenv.config({
+  path: path.resolve(typeof __dirname !== 'undefined' ? __dirname : '.', '../../../../.env'),
+});
 
 export function getConfig(): EnvConfig {
   const result = envSchema.safeParse(process.env);

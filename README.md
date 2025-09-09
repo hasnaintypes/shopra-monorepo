@@ -55,7 +55,6 @@ It enables sellers to create and manage their stores independently, users to sho
 ### Infrastructure & Tooling
 
 [![PNPM](https://img.shields.io/badge/pnpm-000000?style=flat&logo=pnpm&logoColor=yellow)](https://pnpm.io/)
-[![NX](https://img.shields.io/badge/NX-143055?style=flat&logo=nx&logoColor=white)](https://nx.dev/)
 [![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-2088FF?style=flat&logo=github-actions&logoColor=white)](https://github.com/features/actions)
 [![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat&logo=docker&logoColor=white)](https://www.docker.com/)
 

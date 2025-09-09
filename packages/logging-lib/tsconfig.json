@@ -1,20 +1,14 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "noEmit": false,
-    "declaration": true,
     "outDir": "./dist",
     "rootDir": "./src",
+    "declaration": true,
     "declarationMap": true,
     "sourceMap": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "resolveJsonModule": true,
-    "baseUrl": "./",
-    "module": "CommonJS",
-    "moduleResolution": "Node",
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true
+    "noEmit": false
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist", "**/*.test.ts", "**/*.spec.ts"]

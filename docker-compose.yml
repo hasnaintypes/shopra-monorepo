@@ -1,4 +1,3 @@
-version: '3.8'
 services:
   web:
     build:
@@ -195,6 +194,32 @@ services:
     environment:
       - NODE_ENV=development
     command: pnpm --filter svc-notifications start:dev
+  redpanda:
+    image: redpandadata/redpanda:latest
+    container_name: redpanda
+    command:
+      - redpanda
+      - start
+      - --overprovisioned
+      - --smp
+      - '1'
+      - --memory
+      - '1G'
+      - --reserve-memory
+      - '0M'
+      - --node-id
+      - '0'
+      - --kafka-addr
+      - PLAINTEXT://0.0.0.0:9092
+      - --advertise-kafka-addr
+      - PLAINTEXT://localhost:9092
+      - --pandaproxy-addr
+      - 0.0.0.0:8082
+    ports:
+      - '9092:9092'
+      - '8082:8082'
+    volumes:
+      - redpanda-data:/var/lib/redpanda
   test:
     build:
       context: .
@@ -212,4 +237,6 @@ services:
     command: pnpm test
 volumes:
   pnpm-store:
+    driver: local
+  redpanda-data:
     driver: local

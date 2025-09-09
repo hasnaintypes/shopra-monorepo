@@ -6,9 +6,7 @@
     "declaration": true,
     "declarationMap": true,
     "sourceMap": true,
-    "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true
+    "noEmit": false
   },
   "include": ["src", "prisma"],
   "exclude": ["node_modules", "dist", "test"]
