@@ -59,12 +59,9 @@ export async function deleteVideo(fileId: string): Promise<void> {
   await imageKit.deleteFile(fileId);
 }
 
-export async function generateVideoThumbnail(
-  file: Buffer | Readable | string,
-  time: number = 1,
-): Promise<Buffer | string> {
-  void file;
-  void time;
+// Intended signature for future implementation:
+// async function generateVideoThumbnail(file: Buffer | Readable | string, time: number = 1): Promise<Buffer | string>
+export async function generateVideoThumbnail(): Promise<Buffer | string> {
   // TODO: Implement thumbnail generation (ffmpeg or provider API)
   throw new Error('Not implemented: generateVideoThumbnail');
 }
