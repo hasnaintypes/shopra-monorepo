@@ -92,7 +92,6 @@ shopra-monorepo/
 ├── .github/              # GitHub workflows (CI/CD)
 ├── .husky/               # Git hooks (Prettier, linting, tests)
 ├── .vscode/              # Recommended settings & extensions
-├── nx.json               # NX configuration
 ├── package.json
 ├── pnpm-workspace.yaml   # PNPM workspace configuration
 ├── tsconfig.json
