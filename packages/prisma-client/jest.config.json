@@ -1,0 +1,14 @@
+{
+  "preset": "ts-jest",
+  "testEnvironment": "node",
+  "setupFiles": ["<rootDir>/jest.setup.js"],
+  "roots": ["<rootDir>/test"],
+  "testMatch": ["**/*.spec.ts", "**/*.test.ts"],
+  "collectCoverageFrom": ["src/**/*.ts", "!src/**/*.d.ts", "!src/index.ts"],
+  "coverageDirectory": "coverage",
+  "coverageReporters": ["text", "lcov", "html"],
+  "moduleFileExtensions": ["ts", "js", "json", "node"],
+  "moduleNameMapper": {
+    "^@shopra/config$": "<rootDir>/../../packages/config/src/index.ts"
+  }
+}

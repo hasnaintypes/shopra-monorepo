@@ -1,0 +1,19 @@
+{
+  "testEnvironment": "node",
+  "roots": ["<rootDir>/src"],
+  "testMatch": ["**/tests/**/*.ts", "**/?(*.)+(spec|test).ts"],
+  "collectCoverageFrom": ["src/**/*.ts", "!src/**/*.d.ts", "!src/index.ts"],
+  "coverageDirectory": "coverage",
+  "coverageReporters": ["text", "lcov", "html"],
+  "moduleFileExtensions": ["ts", "js", "json", "node"],
+  "setupFiles": ["<rootDir>/jest.setup.js"],
+  "transform": {
+    "^.+\\.ts$": "ts-jest"
+  },
+  "extensionsToTreatAsEsm": [".ts"],
+  "moduleNameMapper": {
+    "^@shopra/config$": "<rootDir>/../../packages/config/src/index.ts",
+    "^@shopra/logging$": "<rootDir>/../../packages/logging-lib/src/index.ts"
+  },
+  "transformIgnorePatterns": ["/node_modules/"]
+}

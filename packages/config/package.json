@@ -1,10 +1,14 @@
 {
-  "name": "config",
+  "name": "@shopra/config",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
   "scripts": {
-    "test": "echo \"no tests for this package\" && exit 0"
+    "build": "tsc -p tsconfig.json",
+    "lint": "eslint 'src/**/*.{ts,js}' --fix",
+    "test": "jest --passWithNoTests"
   },
   "keywords": [],
   "author": "",

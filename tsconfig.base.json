@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "module": "ESNext",
+    "module": "es2020",
     "lib": ["ES2022", "DOM"],
     "moduleResolution": "Node",
     "strict": true,
@@ -10,10 +10,11 @@
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true,
     "baseUrl": ".",
     "paths": {
-      "@config/*": ["packages/config/src/*"]
+      "@shopra/config": ["packages/config/dist/index"],
+      "@shopra/logging": ["packages/logging-lib/dist/index"],
+      "@shopra/prisma": ["packages/prisma-client/dist/index"]
     },
     "allowJs": true,
     "incremental": true
